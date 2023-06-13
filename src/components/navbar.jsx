@@ -77,7 +77,7 @@ export default function Navbar() {
               justify-content: space-between;
             `}
           >
-            <Link component={RLink} to="/shreeshaktiTrading" sx={styles.logo}>
+            <Link component={RLink} to="/" sx={styles.logo}>
               <Box sx={css`display: flex; align-items: center; `}>
                 <img src={ShreeShaktiLogo} alt="Shree Shakti Logo" />
                 <Typography
@@ -103,27 +103,27 @@ export default function Navbar() {
             </IconButton>
 
             <Box sx={styles.links}>
-              <Link sx={styles.link} component={RLink} to="/shreeshaktiTrading">
+              <Link sx={styles.link} component={RLink} to="/">
                 Home
               </Link>
               <Link
                 sx={styles.link}
                 component={RLink}
-                to="/shreeshaktiTrading/services"
+                to="/services"
               >
                 Services
               </Link>
               <Link
                 sx={styles.link}
                 component={RLink}
-                to="/shreeshaktiTrading/tracking"
+                to="/tracking"
               >
                 Tracking
               </Link>
               <Link
                 sx={styles.link}
                 component={RLink}
-                to="/shreeshaktiTrading/shipment"
+                to="/shipment"
               >
                 Shipment
               </Link>
@@ -145,7 +145,7 @@ export default function Navbar() {
                 <Link
                     sx={styles.link}
                     component={RLink}
-                    to="/shreeshaktiTrading"
+                    to="/"
                     onClick={() => setOpen(!open)}
                   >
                     Home
@@ -153,7 +153,7 @@ export default function Navbar() {
                   <Link
                     sx={styles.link}
                     component={RLink}
-                    to="/shreeshaktiTrading/services"
+                    to="/services"
                     onClick={() => setOpen(!open)}
                   >
                     Services
@@ -161,7 +161,7 @@ export default function Navbar() {
                   <Link
                     sx={styles.link}
                     component={RLink}
-                    to="/shreeshaktiTrading/tracking"
+                    to="/tracking"
                     onClick={() => setOpen(!open)}
                   >
                     Tracking
@@ -169,7 +169,7 @@ export default function Navbar() {
                   <Link
                     sx={styles.link}
                     component={RLink}
-                    to="/shreeshaktiTrading/shipment"
+                    to="/shipment"
                     onClick={() => setOpen(!open)}
                   >
                     Shipment
