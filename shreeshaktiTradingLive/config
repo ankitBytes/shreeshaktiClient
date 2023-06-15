@@ -4,12 +4,6 @@
 	bare = true
 	symlinks = false
 	ignorecase = true
-packedGitLimit = 512m
-packedGitWindowSize = 512m
-
 [remote "origin"]
 	url = https://github.com/ankitBytes/shreeshaktiTradingLive.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
-deltaCacheSize = 2047m
-packedSizeLimit = 2047m
-windowMemory = 2047m

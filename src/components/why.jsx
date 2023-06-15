@@ -1,19 +1,47 @@
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 import { css } from "@emotion/react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import React from 'react';
+
+import { AnimatedOnScroll } from "react-animated-css-onscroll";
+import "animate.css/animate.min.css";
 
 // animation
-import { motion } from "framer-motion";
-// import { useInView } from "react-intersection-observer";
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 export default function WhySection() {
+  const controls = useAnimation();
+
+  const ref = useRef();
+  const isInView = useInView(ref, { margin: "0px 0px -300px 0px" });
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [controls, isInView]);
+
+  const whySectionData = [
+    {
+      heading: "our vision",
+      desc: " With unwavering dedication and a relentless pursuit of innovation, we aim to set new standards and achieve unparalleled success in the global food and beverages trade industry.",
+    },
+    {
+      heading: "our vision",
+      desc: " With unwavering dedication and a relentless pursuit of innovation, we aim to set new standards and achieve unparalleled success in the global food and beverages trade industry.",
+    },
+    {
+      heading: "our vision",
+      desc: " With unwavering dedication and a relentless pursuit of innovation, we aim to set new standards and achieve unparalleled success in the global food and beverages trade industry.",
+    },
+  ];
+
   const styles = {
     whySection: css`
-      background-color: #EAEAEA;
+      background-color: #eaeaea;
       min-height: 30vh;
     `,
     card: css`
@@ -40,72 +68,73 @@ export default function WhySection() {
       }
     `,
   };
-  return (
-    <Box sx={styles.whySection}>
-      <Container maxWidth="lg" sx={{ padding: "3rem 1rem" }}>
-        <Typography
-          variant="h3"
-          noWrap
-          gutterBottom
-          sx={{ textAlign: "center", fontFamily: "bebas neue", color: "#F07C00"}}
-          color={""}
-        >
-          Why Choose Us?
-        </Typography>
 
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+
+  return (
+    <Box sx={styles.whySection} ref={ref}>
+      <Container maxWidth="lg" sx={{ padding: "3rem 1rem" }}>
         <motion.div
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 1, type: "spring", bounce: 0.5 }}
+          animate={controls}
+          initial={"hidden"}
+          variants={{
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.2 },
+            },
+            hidden: {
+              opacity: 0,
+              y: 100,
+            },
+          }}
         >
-          <Grid container spacing={2} sx={styles.cardContainer}>
-            <Grid item xs={12} md={4}>
+          <Typography
+            variant="h3"
+            noWrap
+            gutterBottom
+            sx={{
+              textAlign: "center",
+              fontFamily: "bebas neue",
+              color: "#F07C00",
+            }}
+            color={""}
+          >
+            Why Choose Us?
+          </Typography>
+        </motion.div>
+
+        <Grid container spacing={2} sx={styles.cardContainer}>
+          {whySectionData.map((data, index) => (
+            <Grid item xs={12} md={4} key={index}>
               <motion.div
-              //  initial={{ x: '-100vw', opacity: 0 }}
-              //  animate={{ x: 0, opacity: 1 }}
-              //  transition={{ duration: 1,type:"spring", bounce: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                animate={controls}
+                initial="hidden"
+                variants={{
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { delay: 0.2 + index * 0.2 },
+                    y: 0,
+                  },
+                  hidden: { y: 50, opacity: 0.1 },
+                }}
               >
                 <Box sx={styles.card}>
                   <Typography variant="h6" noWrap>
-                    OUR VISION
+                    {data.heading}
                   </Typography>
-                  <Typography variant="body1">
-                    With unwavering dedication and a relentless pursuit of
-                    innovation, we aim to set new standards and achieve
-                    unparalleled success in the global food and beverages trade
-                    industry.
-                  </Typography>
+                  <Typography variant="body1">{data.desc}</Typography>
                 </Box>
               </motion.div>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={styles.card}>
-                <Typography variant="h6" noWrap>
-                  OUR VISION
-                </Typography>
-                <Typography variant="body1">
-                  With unwavering dedication and a relentless pursuit of
-                  innovation, we aim to set new standards and achieve
-                  unparalleled success in the global food and beverages trade
-                  industry.
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={styles.card}>
-                <Typography variant="h6" noWrap>
-                  OUR VISION
-                </Typography>
-                <Typography variant="body1">
-                  With unwavering dedication and a relentless pursuit of
-                  innovation, we aim to set new standards and achieve
-                  unparalleled success in the global food and beverages trade
-                  industry.
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </motion.div>
+          ))}
+        </Grid>
       </Container>
     </Box>
   );
