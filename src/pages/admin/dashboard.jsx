@@ -8,18 +8,17 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Heading from "../../components/pageHeader";
-import Alert from "@mui/material/Alert";
+
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Snackbar from "@mui/material/Snackbar";
 
 import { css } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { UserAuth } from "../../contexts/authContext";
 import { useState, useEffect } from "react";
-
-// import { clients } from "../../local-data/clients";
 
 // create ref to client logos folder on firebase storage
 import { storage } from "../../firebase";
@@ -39,51 +38,84 @@ import {
 } from "firebase/firestore";
 
 export default function AdminDashboard() {
+  const { logOut } = UserAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [viewclients, setViewclients] = useState(false);
   const [addclient, setAddclient] = useState(false);
   const [feedback, setFeedback] = useState({
     state: false,
     message: "",
   });
+  const [loginStatus, setLoginStatus] = useState(location?.state?.isAdmin);
 
-  const { logOut } = UserAuth();
-  const navigate = useNavigate();
+  useEffect(() => {
+    setLoginStatus(location?.state?.isAdmin);
+  }, [location]);
 
   const styles = {
     OperationBtn: css`
       width: 100%;
-      max-width: 200px;
+      max-width: 300px;
       padding: 1rem;
+      border: 0.12rem solid;
+
+      &:hover{
+        background-color: rgba(233, 230, 231, 0.8);
+      }
     `,
     OperationBox: css`
       justify-content: center;
       align-self: center;
     `,
   };
+
   return (
     <Box>
       <Heading
         title="ADMIN DASHBOARD"
         description={
           <Button
-            variant="contained"
+            variant="outlined"
             onClick={() => {
               logOut();
-              navigate('/admin/login');
+              navigate("/admin/login", { state: { isAdmin: false } });
             }}
+            sx={css`
+            color:#EAEAEA;
+            font-size: 1rem;
+            border-color: #EAEAEA;
+
+            &:hover {
+              color: #a43d2b;
+              background-color: #EAEAEA;  
+            }
+
+            @media (max-width: 768px) {
+              border: none;
+              font-size: 0.8rem;
+              padding: 0;
+              color: #ad72f9;
+
+              &:hover {
+                background: none;
+              }
+            }
+          `
+        }
+            size="small"
           >
             LOGOUT
           </Button>
         }
-
         back="<< BACK TO HOMEPAGE"
       />
       <Container maxWidth="xl">
-        <Box sx={{ padding: "2rem 0" }}>
+        <Box sx={{ padding: "2rem 0"}}>
           <Stack spacing={2} direction="row" sx={styles.OperationBox}>
             <Button
               sx={styles.OperationBtn}
-              variant="contained"
+              variant="outlined"
               onClick={() => {
                 setAddclient(!addclient);
                 setViewclients(false);
@@ -93,7 +125,7 @@ export default function AdminDashboard() {
             </Button>
             <Button
               sx={styles.OperationBtn}
-              variant="contained"
+              variant="outlined"
               onClick={() => {
                 setViewclients(!viewclients);
                 setAddclient(false);
@@ -120,25 +152,40 @@ export default function AdminDashboard() {
               left: "0",
             }}
           >
-            <Collapse in={feedback.state}>
-              <Alert
-                action={
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setFeedback({ state: false, message: "" });
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-                }
-                sx={{ mb: 2 }}
-              >
-                {feedback.message}
-              </Alert>
-            </Collapse>
+            <Snackbar
+              open={feedback.state}
+              autoHideDuration={6000}
+              onClose={() => setFeedback({ state: false, message: "" })}
+              message={feedback.message}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setFeedback({ state: false, message: "" });
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            />
+            <Snackbar
+              open={loginStatus}
+              autoHideDuration={8000}
+              onClose={() => setLoginStatus(false)}
+              message={"You are logged in as Admin."}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => setLoginStatus(false)}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            />
           </Box>
         </Box>
       </Container>
