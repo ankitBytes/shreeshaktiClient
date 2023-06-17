@@ -21,7 +21,7 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formState, setFormState] = useState({ loading: false, error: null });
-  const [loginStatus, setLoginStatus] = useState(location?.state?.isAdmin);
+  const [loginStatus, setLoginStatus] = useState(location?.state?.from==="/admin/dashboard"?true:false);
 
   useEffect(() => {
     setLoginStatus(location?.state?.isAdmin);
@@ -115,7 +115,7 @@ export default function AdminLogin() {
           >
             <Snackbar
               open={!loginStatus}
-              autoHideDuration={8000}
+              autoHideDuration={3000}
               onClose={() => setLoginStatus(false)}
               message={"You were logged out!"}
               action={

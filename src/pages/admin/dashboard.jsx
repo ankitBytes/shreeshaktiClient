@@ -41,6 +41,7 @@ export default function AdminDashboard() {
   const { logOut } = UserAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
   const [viewclients, setViewclients] = useState(false);
   const [addclient, setAddclient] = useState(false);
   const [feedback, setFeedback] = useState({
@@ -79,7 +80,7 @@ export default function AdminDashboard() {
             variant="outlined"
             onClick={() => {
               logOut();
-              navigate("/admin/login", { state: { isAdmin: false } });
+              navigate("/admin/login", { state: { isAdmin: false, from:location.pathname } });
             }}
             sx={css`
             color:#EAEAEA;
@@ -172,7 +173,7 @@ export default function AdminDashboard() {
             />
             <Snackbar
               open={loginStatus}
-              autoHideDuration={8000}
+              autoHideDuration={4000}
               onClose={() => setLoginStatus(false)}
               message={"You are logged in as Admin."}
               action={
