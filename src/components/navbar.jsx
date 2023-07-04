@@ -13,6 +13,7 @@ import Collapse from "@mui/material/Collapse";
 import { useEffect, useState } from "react";
 import ShreeShaktiLogo from "../assets/shreeshakti-logo.png";
 import { Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar"
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -53,12 +54,13 @@ export default function Navbar() {
     `,
 
     link: css`
-      color: #094559;
-      font-size: 1.2rem;
+      color: #0392c1;
+      font-size: 1.4rem;
       text-decoration: none;
       margin: 0 1rem;
+      letter-spacing: 0.1rem;
       &:hover {
-        text-decoration: underline;
+        // text-decoration: underline;
         color: #9d8f33;
       }
     `,
@@ -79,11 +81,12 @@ export default function Navbar() {
     <Box sx={{ marginBottom: "3.5rem" }}>
       <Box sx={styles.main}>
         <Container maxWidth="xl">
-          <Box
+          <Stack
             sx={css`
               display: flex;
               justify-content: space-between;
             `}
+            direction="row"
           >
             <Link component={RLink} to="/" sx={styles.logo}>
               <Box
@@ -92,14 +95,20 @@ export default function Navbar() {
                   align-items: center;
                 `}
               >
-                <img src={ShreeShaktiLogo} alt="Shree Shakti Logo" />
+              <Avatar alt="Shree Shakti logo" src={ShreeShaktiLogo} />
                 <Typography
                   variant="h5"
-                  sx={{
-                    textDecoration: "none",
-                    fontFamily: "bebas neue",
-                    paddingLeft: ".5rem",
-                  }}
+                  sx={css`
+                    text-decoration: none;
+                    font-family: bebas neue;
+                    padding-left: 0.5rem;
+                    letter-spacing: 0.08rem;
+
+                    @media (max-width: 900px) {
+                      display: none;
+                    }
+                  `
+                  }
                 >
                   ShreeShaktiTrading
                 </Typography>
@@ -115,7 +124,7 @@ export default function Navbar() {
               {open ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
 
-            <Box sx={styles.links}>
+            <Stack sx={styles.links} direction='row' spacing={3}>
               <Link sx={styles.link} component={RLink} to="/">
                 Home
               </Link>
@@ -131,14 +140,14 @@ export default function Navbar() {
               <Link sx={styles.link} component={RLink} to="/admin/login">
                 Admin
               </Link>
-            </Box>
-          </Box>
+            </Stack>
+          </Stack>
 
           <Collapse in={open}>
             <Container
               maxWidth="xl"
               sx={css`
-                @media (min-width: 768px) {
+                @media (min-width: 770px) {
                   display: none;
                 }
               `}
