@@ -103,16 +103,6 @@ export default function PageFooter() {
             <Grid item xs={12} md={6}>
               <Grid container spacing={2} style={footerStyles.section}>
                 <Grid item xs={12}>
-                  {/* <Paper
-                    variant="outlined"
-                    square
-                    sx={{
-                      background: "#344534",
-                      height: "5rem",
-                      aspectRatio: "1/1",
-                      borderRadius: "50%",
-                    }}
-                  /> */}
                   <img
                     src={ShreeShaktiLogo}
                     alt="ShreeShakti Logo"
@@ -163,7 +153,7 @@ export default function PageFooter() {
             <Grid item xs={12} md={6}>
               <Grid container spacing={1} style={footerStyles.section}>
                 <Grid item xs={12}>
-                  <Typography variant="h5" sx={{fontFamily:"bebas neue"}}>Contact Us</Typography>
+                  <Typography variant="h4" sx={{fontFamily:"bebas neue"}}>Contact Us</Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <form onSubmit={submitForm}>
@@ -201,9 +191,7 @@ export default function PageFooter() {
                     />
                     <Button
                       variant="outlined"
-                      color="secondary"
                       sx={footerStyles.formButton}
-                      // onClick={submitForm}
                       type="submit"
                     >
                       Send

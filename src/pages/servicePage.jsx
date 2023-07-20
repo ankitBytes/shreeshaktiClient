@@ -16,6 +16,8 @@ import S2 from "../assets/services-2.jpg";
 import Startimage from "../assets/quote-parallax.jpg";
 
 export default function MediaCard() {
+  // setting the title of the page
+  document.title = "Services | Shree Shakti Trading";
   const styles = {
     heading: css`
       display: flex;
@@ -49,176 +51,223 @@ export default function MediaCard() {
   };
   return (
     <>
-    <Heading title="OUR SERVICES" description="We freight to all over the world
-    The best logistic company, Fastly and Safely"/>
-      <Box sx={styles.body}>
-        <Container maxWidth="xl" sx={{ paddingBottom: "2rem" }}>
-          <Box sx={styles.wordStyle}>
-            <Typography
-              variant="h3"
-              color={"primary"}
-              sx={{ fontFamily: "bebas neue" }}
-            >
-              SERVICES
-            </Typography>
-            <Typography variant="body1" sx={{ fontFamily: "poppins" }}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            </Typography>
-          </Box>
+      <div style={{ padding: "3.5rem 0",background:'#fff' }}>
+        <Heading
+          title="OUR SERVICES"
+          description="We freight to all over the world
+    The best logistic company, Fastly and Safely"
+        />
+        <Box sx={styles.body}>
+          <Container maxWidth="xl" sx={{ paddingBottom: "2rem" }}>
+            <Box sx={styles.wordStyle}>
+              <Typography
+                variant="h3"
+                color={"primary"}
+                sx={{ fontFamily: "bebas neue" }}
+              >
+                SERVICES
+              </Typography>
+              <Typography variant="body1" sx={{ fontFamily: "poppins" }}>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              </Typography>
+            </Box>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} lg={4}>
-              <Card sx={{ backgroundColor: "#094559", color: "#EAEAEA", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'}}>
-                <CardMedia sx={{ height: 200 }} image={S2} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: "bebas neue" }}
-                  >
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Card
+                  sx={{
+                    backgroundColor: "#094559",
+                    color: "#EAEAEA",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
+                >
+                  <CardMedia sx={{ height: 200 }} image={S2} />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: "bebas neue" }}
+                    >
+                      Lizard
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                    >
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Grid item xs={12} sm={6} lg={4}>
-              <Card sx={{ backgroundColor: "#094559", color: "#EAEAEA", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'}}>
-                <CardMedia sx={{ height: 200 }} image={S2} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: "bebas neue" }}
-                  >
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Card
+                  sx={{
+                    backgroundColor: "#094559",
+                    color: "#EAEAEA",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
+                >
+                  <CardMedia sx={{ height: 200 }} image={S2} />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: "bebas neue" }}
+                    >
+                      Lizard
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                    >
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Grid item xs={12} sm={6} lg={4}>
-              <Card sx={{ backgroundColor: "#094559", color: "#EAEAEA", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'}}>
-                <CardMedia sx={{ height: 200 }} image={S2} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: "bebas neue" }}
-                  >
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Card
+                  sx={{
+                    backgroundColor: "#094559",
+                    color: "#EAEAEA",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
+                >
+                  <CardMedia sx={{ height: 200 }} image={S2} />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: "bebas neue" }}
+                    >
+                      Lizard
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                    >
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Grid item xs={12} sm={6} lg={4}>
-              <Card sx={{ backgroundColor: "#094559", color: "#EAEAEA", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'}}>
-                <CardMedia sx={{ height: 200 }} image={S2} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: "bebas neue" }}
-                  >
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Card
+                  sx={{
+                    backgroundColor: "#094559",
+                    color: "#EAEAEA",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
+                >
+                  <CardMedia sx={{ height: 200 }} image={S2} />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: "bebas neue" }}
+                    >
+                      Lizard
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                    >
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Grid item xs={12} sm={6} lg={4}>
-              <Card sx={{ backgroundColor: "#094559", color: "#EAEAEA", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'}}>
-                <CardMedia sx={{ height: 200 }} image={S2} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: "bebas neue" }}
-                  >
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Card
+                  sx={{
+                    backgroundColor: "#094559",
+                    color: "#EAEAEA",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
+                >
+                  <CardMedia sx={{ height: 200 }} image={S2} />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: "bebas neue" }}
+                    >
+                      Lizard
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                    >
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Grid item xs={12} sm={6} lg={4}>
-              <Card sx={{ backgroundColor: "#094559", color: "#EAEAEA", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px'}}>
-                <CardMedia sx={{ height: 200 }} image={S2} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ fontFamily: "bebas neue" }}
-                  >
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontFamily: "poppins", color: "#EAEAEA", }}
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Card
+                  sx={{
+                    backgroundColor: "#094559",
+                    color: "#EAEAEA",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
+                >
+                  <CardMedia sx={{ height: 200 }} image={S2} />
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      sx={{ fontFamily: "bebas neue" }}
+                    >
+                      Lizard
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                    >
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      </Box>
+          </Container>
+        </Box>
+      </div>
     </>
   );
 }

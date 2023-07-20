@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import { css } from "@emotion/react";
 
 // animation
-import { m, useAnimation } from "framer-motion";
+import { m } from "framer-motion";
 
 // swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -124,7 +124,7 @@ export default function PageHeader() {
                       variant="h3"
                       sx={css`
                         text-transform: uppercase;
-                        color: yellow;
+                        color: #ef7f1a;
                         text-align: center;
 
                         @media (max-width: 768px) {
@@ -188,7 +188,7 @@ export default function PageHeader() {
                       variant="h3"
                       sx={css`
                         text-transform: uppercase;
-                        color: yellow;
+                        color: #ef7f1a;
                         text-align: center;
 
                         @media (max-width: 768px) {
@@ -252,7 +252,7 @@ export default function PageHeader() {
                       variant="h3"
                       sx={css`
                         text-transform: uppercase;
-                        color: yellow;
+                        color: #ef7f1a;
                         text-align: center;
 
                         @media (max-width: 768px) {

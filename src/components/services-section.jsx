@@ -36,7 +36,7 @@ export default function ServiceSection() {
       font-family: "bebas neue";
     `,
     serviceSection: css`
-      background-color: #094559;
+      background: linear-gradient(45deg, #B51D50 0%, #EF7F1A 100%);
       min-height: 30vh;
       padding: 3rem 0;
     `,
@@ -73,7 +73,7 @@ export default function ServiceSection() {
           >
             <Typography
               gutterBottom
-              variant="h3"
+              variant="h2"
               component="div"
               sx={styles.heading}
             >
@@ -84,7 +84,7 @@ export default function ServiceSection() {
             {services.map((service, index) => (
               <Grid item xs={12} md={4} key={index} sx={styles.cardItem}>
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.025 }}
                   animate={controls}
                   initial="hidden"
                   variants={{
@@ -111,7 +111,7 @@ export default function ServiceSection() {
 function ServiceCard({ service }) {
   const styles = {
     card: css`
-      max-width: 24rem;
+      // max-width: 24rem;
     `,
   };
   return (
@@ -123,15 +123,15 @@ function ServiceCard({ service }) {
           title="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography  variant="h5" component="div" fontWeight={"medium"}>
             {service.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="subtitle2" color="text.secondary">
             {service.description}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" sx={{color:"#ef7f1a"}}>Learn More</Button>
         </CardActions>
       </Card>
     </>

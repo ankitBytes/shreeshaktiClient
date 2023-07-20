@@ -12,6 +12,9 @@
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+  background: linear-gradient(135deg, #0000 18.75%, #fcfcfc 0 31.25%, #0000 0),
+    repeating-linear-gradient(45deg, #fcfcfc -6.25% 6.25%, #f5f5f5 0 18.75%);
+  background-size: 200px 200px;
 }
 
 .details Button:hover {
@@ -22,16 +25,43 @@ body {
 ._2qp0Z {
   z-index: 99;
 }
-._3twZq{
+._3twZq {
   margin: auto 0;
 }
 
+/* header carousel next and prev styles */
+.swiper-button-next,
+  .swiper-button-prev{
+    /* background: #B51D50; */
+    color: #EF7F1A;
+    margin: 0 .5rem;
+  }
+
 @media screen and (max-width: 576px) {
+  ._1yCVn {
+    width: 86%;
+  }
+}
+/* hide controls of header swiper carousel */
+@media screen and (max-width: 768px) {
   .swiper-button-next,
   .swiper-button-prev {
     display: none;
   }
-  ._1yCVn{
-   width: 86%;
-  }
 }
+/* page loaders css */
+#loader-wrapper{
+  position: absolute;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loader-wrapper img{
+  max-width: 150px;
+}
+

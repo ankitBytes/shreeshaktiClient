@@ -53,6 +53,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     setLoginStatus(location?.state?.isAdmin);
   }, [location]);
+  document.title = "Admin Dashboard | Shree Shakti Express";
 
   const styles = {
     OperationBtn: css`

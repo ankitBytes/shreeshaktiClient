@@ -53,7 +53,7 @@ export default function Quote() {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -127,11 +127,17 @@ export default function Quote() {
       }
     `,
     quoteContainer: css`
-      position: relative;
+      position: absolute;
       isolation: isolate;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      @media (max-width: 768px) {
+        position: relative;
+      }
     `,
     formContainer: css`
-      padding: 3rem 0.5rem;
+      padding: 2rem 0.5rem;
       @media (min-width: 768px) {
         max-width: 50%;
       }
@@ -146,7 +152,7 @@ export default function Quote() {
       left: 0;
       z-index: -1;
       opacity: 0.9;
-      background: rgba(36, 41, 55, 0.8);
+      background: linear-gradient(45deg, #b51d50 0%, #ef7f1a 100%);
       @media (max-width: 768px) {
         max-width: 100%;
       }
@@ -159,7 +165,7 @@ export default function Quote() {
       }
 
       & label {
-        color: #999;
+        color: #aaa;
       }
       & label.Mui-focused {
         color: white;
@@ -180,7 +186,7 @@ export default function Quote() {
       }
       & .MuiOutlinedInput-root {
         & fieldset {
-          border-color: #999;
+          border-color: #aaa;
         }
         &:hover fieldset {
           border-color: white;
@@ -193,29 +199,29 @@ export default function Quote() {
     datePickerField: css`
       width: 100%;
       svg {
-        color: #999;
+        color: #aaa;
       }
       svg: hover {
         color: white;
       }
       & label {
-        color: #999;
+        color: #aaa;
       }
       & label.Mui-focused {
-        color: #999;
+        color: #aaa;
       }
       & input {
         color: white;
       }
       & .MuiOutlinedInput-root {
         & fieldset {
-          border-color: #999;
+          border-color: #aaa;
         }
         &:hover fieldset {
           border-color: white;
         }
         &.Mui-focused fieldset {
-          border-color: #ddd;
+          border-color: #aaa;
         }
       }
     `,
@@ -225,30 +231,43 @@ export default function Quote() {
     `,
 
     submitButton: css`
-      background-color: #9a6125;
+      background-color: #e74028;
       color: #fff;
       font-family: poppins;
+      padding: 1rem 3rem;
 
       &:hover {
-        background-color: #f07c00;
+        background-color: #ef7f1a;
       }
     `,
   };
 
   return (
     <>
-      <Box sx={css`isolation; isolate;`}>
+      <Box sx={css`isolation; isolate;position: relative;`}>
         <Box
           sx={css`
+            &::after{
+              content: "";
+              display: block;
+              min-height: 90vh;
+              background: rgba(0,0,0,0.5);
+
+              @media (max-width: 768px){
+                min-height: unset;
+              }
+            }
+
             @media (min-width: 768px) {
+              position: relative;
               width: 100%;
-              min-height: 100vh;
+              min-height: 90vh;
               z-index: -1;
-              position: absolute;
               background: url(${quoteBackground}) no-repeat center center;
               background-size: cover;
               background-attachment: fixed;
             }
+
           `}
         ></Box>
         <Box sx={styles.quoteContainer} ref={ref}>
@@ -262,168 +281,166 @@ export default function Quote() {
             }}
           >
             <Container maxWidth="lg">
-              <m.div>
-                <Box sx={styles.formContainer}>
-                  <Box sx={styles.heading}>
-                    <Typography
-                      variant="h3"
-                      sx={{ fontFamily: "bebas neue", color: "#F07C00" }}
-                    >
-                      Get a free quote
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
-                    >
-                      We always use best and fastest fleets
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontFamily: "poppins",
-                        color: "#E62E23",
-                        fontSize: "0.7rem",
-                      }}
-                    >
-                      * mark indicates required fields
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <form onSubmit={(e) => handleQuoteForm(e)}>
-                      <Grid container spacing={1} sx={styles.inputElement}>
-                        <Grid item xs={12}>
-                          <TextField
-                            fullWidth
-                            id="name"
-                            label="Full Name"
-                            sx={styles.formInputField}
-                            required
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            type="email"
-                            sx={styles.formInputField}
-                            required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            //
-                            fullWidth
-                            id="mobile"
-                            label="Mobile"
-                            sx={styles.formInputField}
-                            required
-                            value={mobile}
-                            onChange={(e) => setMobile(e.target.value)}
-                            type="number"
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            //
-                            fullWidth
-                            id="destinationTo"
-                            label="Destination To"
-                            sx={styles.formInputField}
-                            required
-                            value={destinationTo}
-                            onChange={(e) => setDestinationTo(e.target.value)}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            fullWidth
-                            id="destinationFrom"
-                            label="Destination From"
-                            sx={styles.formInputField}
-                            required
-                            value={destinationFrom}
-                            onChange={(e) => setDestinationFrom(e.target.value)}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            fullWidth
-                            id="shipmentType"
-                            label="Shipping Type"
-                            sx={styles.formInputField}
-                            required
-                            value={type}
-                            onChange={(e) => setType(e.target.value)}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                          <DatePicker
-                            label="Date"
-                            sx={styles.datePickerField}
-                            required
-                            value={date}
-                            onChange={(value) => setDate(value)}
-                            slotProps={{ textField: { variant: "outlined" } }}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                          <TextField
-                            id="Messege"
-                            multiline
-                            rows={4}
-                            fullWidth
-                            label="Messege"
-                            sx={styles.formInputField}
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            type="submit"
-                            sx={styles.submitButton}
-                          >
-                            Submit
-                          </Button>
-                          <Snackbar
-                            open={open}
-                            autoHideDuration={5000}
-                            onClose={handleClose}
-                          >
-                            <Alert
-                              onClose={handleClose}
-                              severity="success"
-                              sx={css`
-                                width: 100%;
-
-                                @media (max-width: 768px) {
-                                  width: 70%;
-                                }
-                              `}
-                            >
-                              Sent!
-                            </Alert>
-                          </Snackbar>
-                        </Grid>
-                      </Grid>
-                    </form>
-                  </Box>
+              <Box sx={styles.formContainer}>
+                <Box sx={styles.heading}>
+                  <Typography
+                    variant="h2"
+                    sx={{ fontFamily: "bebas neue", color: "#fff" }}
+                  >
+                    Get a free quote
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontFamily: "poppins", color: "#EAEAEA" }}
+                  >
+                    We always use best and fastest fleets
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontFamily: "poppins",
+                      color: "#E62E23",
+                      fontSize: "0.7rem",
+                    }}
+                  >
+                    * mark indicates required fields
+                  </Typography>
                 </Box>
-              </m.div>
+                <Box>
+                  <form onSubmit={(e) => handleQuoteForm(e)}>
+                    <Grid container spacing={1} sx={styles.inputElement}>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="name"
+                          label="Full Name"
+                          sx={styles.formInputField}
+                          required
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          id="email"
+                          label="Email"
+                          type="email"
+                          sx={styles.formInputField}
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          //
+                          fullWidth
+                          id="mobile"
+                          label="Mobile"
+                          sx={styles.formInputField}
+                          required
+                          value={mobile}
+                          onChange={(e) => setMobile(e.target.value)}
+                          type="number"
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          //
+                          fullWidth
+                          id="destinationTo"
+                          label="Destination To"
+                          sx={styles.formInputField}
+                          required
+                          value={destinationTo}
+                          onChange={(e) => setDestinationTo(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          id="destinationFrom"
+                          label="Destination From"
+                          sx={styles.formInputField}
+                          required
+                          value={destinationFrom}
+                          onChange={(e) => setDestinationFrom(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          id="shipmentType"
+                          label="Shipping Type"
+                          sx={styles.formInputField}
+                          required
+                          value={type}
+                          onChange={(e) => setType(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <DatePicker
+                          label="Date"
+                          sx={styles.datePickerField}
+                          required
+                          value={date}
+                          onChange={(value) => setDate(value)}
+                          slotProps={{ textField: { variant: "outlined" } }}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <TextField
+                          id="Messege"
+                          multiline
+                          rows={4}
+                          fullWidth
+                          label="Messege"
+                          sx={styles.formInputField}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          variant="contained"
+                          size="large"
+                          type="submit"
+                          sx={styles.submitButton}
+                        >
+                          Submit
+                        </Button>
+                        <Snackbar
+                          open={open}
+                          autoHideDuration={5000}
+                          onClose={handleClose}
+                        >
+                          <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            sx={css`
+                              width: 100%;
+
+                              @media (max-width: 768px) {
+                                width: 70%;
+                              }
+                            `}
+                          >
+                            Sent!
+                          </Alert>
+                        </Snackbar>
+                      </Grid>
+                    </Grid>
+                  </form>
+                </Box>
+              </Box>
             </Container>
           </motion.div>
         </Box>

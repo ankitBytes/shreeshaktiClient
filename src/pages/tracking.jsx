@@ -20,6 +20,8 @@ import Startimage from "../assets/quote-parallax.jpg";
 import dayjs from "dayjs";
 
 export default function TrackingPage() {
+  // setting the title of the page
+  document.title = "Tracking | Shree Shakti Trading";
 
   const [trackingId, setTrackingId] = useState("");
   const [startDate, setStartdate] = useState("");
@@ -28,7 +30,6 @@ export default function TrackingPage() {
   const [originZip, setOriginZip] = useState("");
   const [destination, setDestination] = useState("");
   const [destinationZip, setDestinationZip] = useState("");
-
 
   const styles = {
     heading: css`
@@ -113,7 +114,7 @@ export default function TrackingPage() {
 
 
   return (
-    <Box sx={{ background: "#f5f5f5", paddingBottom: "3rem" }}>
+    <Box sx={{ background: "#f5f5f5", padding:"3.5rem 0" }}>
       <Heading
         img={Startimage}
         title="TRACKING"

@@ -29,11 +29,10 @@ export default function Clients() {
     logoImgContainer: {
       aspectRatio: "1/1",
       padding: "1rem",
-      maxHeight: "12rem",
+      maxHeight: "10rem",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      background: "transparent",
     },
     logoImg: {
       width: "100%",
@@ -41,7 +40,7 @@ export default function Clients() {
       objectPosition: "center",
     },
     clientCarouselContainer: {
-      padding: "4rem 0",
+      padding: "2rem 0",
       width: "100%",
       height: "100%",
       background: "white",
@@ -53,15 +52,16 @@ export default function Clients() {
       <Container maxWidth="lg">
         <Stack spacing={2}>
           <Typography
-            variant="h3"
+            variant="h2"
             gutterBottom
             sx={{
               textAlign: "center",
               fontFamily: "bebas neue",
-              color: "#094559",
+              color: "#F07C00",
             }}
           >
-            Our Clients
+            Associate Brands
+            <Typography variant="body2" fontWeight="bold" sx={{ color: "#094559" ,textTransform:'uppercase'}}>India's most reputed brands</Typography>
           </Typography>
 
           <Box>

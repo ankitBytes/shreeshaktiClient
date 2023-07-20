@@ -21,7 +21,7 @@ export default function Navbar() {
   const logoControls = useAnimationControls();
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log("Page scroll: ", latest);
+    // console.log("Page scroll: ", latest);
     if(latest < 0.03){
       logoControls.start('')
     }
@@ -73,12 +73,12 @@ export default function Navbar() {
       width: 100%;
       min-height: 3.5rem;
       top: 0;
-      z-index: 100;
+      z-index: 50;
     `,
   };
 
   return (
-    <Box sx={{ marginBottom: "3.5rem" }}>
+    <Box >
       <Box sx={styles.main}>
         <Container maxWidth="xl">
           <Stack
@@ -98,19 +98,14 @@ export default function Navbar() {
               <Avatar alt="Shree Shakti logo" src={ShreeShaktiLogo} />
                 <Typography
                   variant="h5"
-                  sx={css`
-                    text-decoration: none;
-                    font-family: bebas neue;
-                    padding-left: 0.5rem;
-                    letter-spacing: 0.08rem;
-
-                    @media (max-width: 900px) {
-                      display: none;
-                    }
-                  `
-                  }
+                  sx={{
+                    textDecoration: "none",
+                    fontFamily: "bebas neue",
+                    paddingLeft: ".5rem",
+                    color: "#000",
+                  }}
                 >
-                  ShreeShaktiTrading
+                  Shree Shakti Trading
                 </Typography>
               </Box>
             </Link>

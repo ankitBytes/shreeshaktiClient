@@ -31,19 +31,20 @@ export default function NumbersSection() {
   }, [controls, isInView]);
 
   return (
-    <div style={{ backgroundColor: "#EAEAEA", padding: "2rem 0" }}>
-      <motion.div ref={ref}>
+    <div style={{ padding: "2rem 0" }}>
+      {/* <motion.div > */}
         <Container
           maxWidth="lg"
           sx={css`
             padding: 2rem 0.5rem;
           `}
+          ref={ref}
         >
           <Grid container spacing={{ xs: 5, sm: 6, md: 2 }}>
             {numbersData.map((item, index) => (
               <Grid item xs={12} sm={6} md={3} key={index}>
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.025 }}
                   animate={controls}
                   initial="hidden"
                   variants={{
@@ -66,7 +67,7 @@ export default function NumbersSection() {
             ))}
           </Grid>
         </Container>
-      </motion.div>
+      {/* </motion.div> */}
     </div>
   );
 }
@@ -100,7 +101,7 @@ function NumberCard({ icon, number, title }) {
       position: absolute;
       top: -1.5rem;
       left: 1rem;
-      background: #5c9bd6;
+      background: linear-gradient(45deg, #B51D50 0%, #EF7F1A 100%);
       padding: 0.5rem 1.25rem;
       color: white;
       border-radius: 0.25rem;
@@ -117,7 +118,7 @@ function NumberCard({ icon, number, title }) {
 
     titles: css`
       padding-left: 0.25rem;
-      font-weight: semibold;
+      font-weight: 600;
       font-family: poppins;
     `,
   };
@@ -137,18 +138,16 @@ function NumberCard({ icon, number, title }) {
           end={number}
           enableScrollSpy={true}
           scrollSpyOnce={true}
-          // scrollSpyDelay={2000}
         >
           {({ countUpRef }) => (
             <Typography
-              variant="h4"
+              variant="h3"
               component="div"
-              color={"red"}
+              color={"#EF7F1A"}
+              fontWeight={"bold"}
               sx={{
                 fontFamily: "bebas neue",
-                fontSize: { xs: "2rem", sm: "2.2rem", md: "2.8rem" },
                 paddingRight: ".5rem",
-                fontWeight: "bold",
               }}
             >
               <span ref={countUpRef} />

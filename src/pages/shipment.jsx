@@ -83,6 +83,8 @@ const formContent = {
 };
 
 export default function Shipment() {
+  // setting the title of the page
+  document.title = "Shipment | Shree Shakti Trading";
 
   const [country, setCountry] = useState("");
   const [company, setCompany] = useState("");
@@ -99,7 +101,7 @@ export default function Shipment() {
 
   return (
     <>
-      <Box>
+      <Box sx={{padding: "3.5rem 0",background:'#fff'}}>
         <Box>
           <CardMedia sx={imageStyle} image={Startimage}>
             <Container maxWidth="xl">

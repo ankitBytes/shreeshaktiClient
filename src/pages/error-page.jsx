@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 export default function ErrorPage() {
+  document.title = "Page Not Found"
   return (
     <div
       style={css`

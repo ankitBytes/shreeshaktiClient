@@ -3,12 +3,17 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import React from 'react';
+import React from "react";
 
+// logos
+import Vision from "../assets/our-vision.svg";
+import Mission from "../assets/our-mission.svg";
+import Philosophy from "../assets/our-philosophy.svg";
 
 // animation
 import { motion, useInView, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { Avatar } from "@mui/material";
 
 export default function WhySection() {
   const controls = useAnimation();
@@ -26,47 +31,42 @@ export default function WhySection() {
     {
       heading: "our vision",
       desc: " With unwavering dedication and a relentless pursuit of innovation, we aim to set new standards and achieve unparalleled success in the global food and beverages trade industry.",
+      logo: Vision,
     },
     {
-      heading: "our vision",
-      desc: " With unwavering dedication and a relentless pursuit of innovation, we aim to set new standards and achieve unparalleled success in the global food and beverages trade industry.",
+      heading: "our Mission",
+      desc: "We aim to build lasting relationship with our customers by maintaining the hishest standards of food quality and become the most preferred and reliable food and beverages supplier.",
+      logo: Mission,
     },
     {
-      heading: "our vision",
-      desc: " With unwavering dedication and a relentless pursuit of innovation, we aim to set new standards and achieve unparalleled success in the global food and beverages trade industry.",
+      heading: "our Philosophy",
+      desc: "We are dedicated to providing a truly unique and exceptional experience to our customers, setting new standards of excellence in the food and beverages trade industry.",
+      logo: Philosophy,
     },
   ];
 
   const styles = {
     whySection: css`
-      background-color: #eaeaea;
       min-height: 30vh;
     `,
     card: css`
       padding: 1rem;
-      border: 1px solid #eaeaea;
-      border-radius: 10px;
       margin-bottom: 1rem;
-      min-height: 15rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #094559;
       font-family: "poppins";
-      color: #eaeaea;
 
-      & h6 {
-        text-align: center;
-        margin-bottom: 0.25rem;
-        font-weight: 600;
+      & h5 {
+        color: rgb(231, 64, 40);
       }
+
       & p {
         text-align: center;
       }
     `,
   };
-
 
   return (
     <Box sx={styles.whySection} ref={ref}>
@@ -87,7 +87,7 @@ export default function WhySection() {
           }}
         >
           <Typography
-            variant="h3"
+            variant="h2"
             noWrap
             gutterBottom
             sx={{
@@ -95,9 +95,15 @@ export default function WhySection() {
               fontFamily: "bebas neue",
               color: "#F07C00",
             }}
-            color={""}
           >
             Why Choose Us?
+            <Typography
+              variant="body2"
+              fontWeight="bold"
+              sx={{ textTransform: "uppercase", color: "#094559" }}
+            >
+              The Value that define us{" "}
+            </Typography>
           </Typography>
         </motion.div>
 
@@ -119,10 +125,26 @@ export default function WhySection() {
                 }}
               >
                 <Box sx={styles.card}>
-                  <Typography variant="h6" noWrap sx={{textTransform: 'uppercase'}}>
+                  <Avatar
+                    src={data.logo}
+                    alt={data.heading}
+                    sx={css`
+                      width: 120px;
+                      height: 120px;
+                      margin: 1rem;
+                    `}
+                  />
+                  <Typography
+                    variant="h5"
+                    noWrap
+                    sx={{ textTransform: "uppercase", fontWeight: "600" }}
+                    gutterBottom
+                  >
                     {data.heading}
                   </Typography>
-                  <Typography variant="body1" sx={{fontWeight: 'light'}}>{data.desc}</Typography>
+                  <Typography variant="body1" fontWeight="medium">
+                    {data.desc}
+                  </Typography>
                 </Box>
               </motion.div>
             </Grid>
