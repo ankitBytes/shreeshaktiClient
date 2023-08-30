@@ -81,7 +81,7 @@ export default function PageFooter() {
 
   const handleQuoteForm = async (e) => {
     e.preventDefault();
-    const recipient = 'sonusahu2703@gmail.com';
+    const recipient = 'sahunkitkumar60@gmail.com';
     const subject = `Request for the tracing details of my shipment`;
     const htmlContent = `
     ${name} have requested a quote below are the details of the shipment
