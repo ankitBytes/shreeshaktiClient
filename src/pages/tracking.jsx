@@ -9,24 +9,24 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-
+import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { css } from "@emotion/react";
-
+import {Link} from "react-router-dom";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Heading from "../components/pageHeader";
 // // images
 import Startimage from "../assets/quote-parallax.jpg";
-import dayjs from "dayjs";
 
 export default function TrackingPage() {
   // setting the title of the page
   document.title = "Tracking | Shree Shakti Trading";
 
   const [trackingId, setTrackingId] = useState("");
-  const [startDate, setStartdate] = useState("");
+  const [startDate, setStartdate] = useState(null);
   const [endDate, setEnddate] = useState(null);
-  const [origin, setOrigin] = useState(null);
+  const [origin, setOrigin] = useState("");
   const [originZip, setOriginZip] = useState("");
   const [destination, setDestination] = useState("");
   const [destinationZip, setDestinationZip] = useState("");
@@ -74,59 +74,63 @@ export default function TrackingPage() {
       destination,
       originZip,
       destinationZip
-      );
+    );
 
-      let startDate_str = dayjs(startDate).format("DD/MM/YYYY");
-      let endDate_str = dayjs(endDate).format("DD/MM/YYYY");
+    let startDate_str = dayjs(startDate).format("DD/MM/YYYY");
+    let endDate_str = dayjs(endDate).format("DD/MM/YYYY");
 
-      const response = await fetch(
-        `https://shreeshaktiserver.onrender.com/tracking`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type" : "application/json",
-          },
-          body: JSON.stringify({
-            trackingId,
-            startDate_str,
-            endDate_str,
-            origin,
-            originZip,
-            destination,
-            destinationZip
-          }),
-        }
-      )
+    const response = await fetch(
+      `https://shreeshaktiserver.onrender.com/tracking`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          trackingId,
+          startDate_str,
+          endDate_str,
+          origin,
+          originZip,
+          destination,
+          destinationZip,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(async (res) => {
         const resData = await res;
 
-        if(resData.status === "success") {
+        if (resData.status === "success") {
           console.log("Messege sent!");
         } else if (resData.status === "false") {
-          console.log("Message failed to send")
+          console.log("Message failed to send");
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
+  };
 
   return (
-    <Box sx={{ background: "#f5f5f5", padding:"3.5rem 0" }}>
+    <Box sx={{ background: "transparent", padding: "3.5rem 0" }}>
       <Heading
-        img={Startimage}
         title="TRACKING"
         description={"We are here to help you track your shipment easily."}
+        links={
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link to="/">Home</Link>
+            <Link to="/tracking">Tracking</Link>
+          </Breadcrumbs>
+        }
       />
 
       <Container maxWidth="xl">
         <Box sx={styles.wordStyle}>
           <Typography
-            variant="h4"
+            variant="h2"
             color={"primary"}
-            sx={{ fontFamily: "bebas neue" }}
+            sx={{ fontFamily: "bebas neue", color: "#ef7f1a" }}
           >
             Track a Shipment
           </Typography>
@@ -141,13 +145,29 @@ export default function TrackingPage() {
           <form>
             <Grid container spacing={2}>
               <Grid item xs={12} md={4}>
-                <TextField fullWidth label="Tracking Id" variant="outlined" value={trackingId} onChange={(e) => setTrackingId(e.target.value)}/>
+                <TextField
+                  fullWidth
+                  label="Tracking Id"
+                  variant="outlined"
+                  value={trackingId}
+                  onChange={(e) => setTrackingId(e.target.value)}
+                />
               </Grid>
               <Grid item xs={12} md={4} sm={6}>
-                <DatePicker label="Start date" sx={styles.datepicker} value={startDate} onChange={(value) => setStartdate(value)} />
+                <DatePicker
+                  label="Start date"
+                  sx={styles.datepicker}
+                  value={startDate}
+                  onChange={(value) => setStartdate(value)}
+                />
               </Grid>
               <Grid item xs={12} md={4} sm={6}>
-                <DatePicker label="End date" sx={styles.datepicker} value={endDate} onChange={(value) => setEnddate(value)} />
+                <DatePicker
+                  label="End date"
+                  sx={styles.datepicker}
+                  value={endDate}
+                  onChange={(value) => setEnddate(value)}
+                />
               </Grid>
 
               <Grid item xs={12} md={6}>
@@ -161,11 +181,12 @@ export default function TrackingPage() {
                     // value={age}
                     label="Orign Country: "
                     // onChange={handleChange}
-                    value={origin} onChange={(e) => setOrigin(e.target.value)}
+                    value={origin}
+                    onChange={(e) => setOrigin(e.target.value)}
                   >
-                    <MenuItem value={'India'}>India</MenuItem>
-                    <MenuItem value={'Unitd States'}>Unitd States</MenuItem>
-                    <MenuItem value={'Canada'}>Canada</MenuItem>
+                    <MenuItem value={"India"}>India</MenuItem>
+                    <MenuItem value={"Unitd States"}>Unitd States</MenuItem>
+                    <MenuItem value={"Canada"}>Canada</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -174,7 +195,8 @@ export default function TrackingPage() {
                   fullWidth
                   label="Origin Zip/Postal Zip"
                   variant="outlined"
-                  value={originZip} onChange={(e) => setOriginZip(e.target.value)}
+                  value={originZip}
+                  onChange={(e) => setOriginZip(e.target.value)}
                 />
               </Grid>
 
@@ -189,11 +211,12 @@ export default function TrackingPage() {
                     // value={age}
                     label="Destination Country: "
                     // onChange={handleChange}
-                    value={destination} onChange={(e) => setDestination(e.target.value)}
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
                   >
-                    <MenuItem value={'India'}>India</MenuItem>
-                    <MenuItem value={'Unitd States'}>Unitd States</MenuItem>
-                    <MenuItem value={'Canada'}>Canada</MenuItem>
+                    <MenuItem value={"India"}>India</MenuItem>
+                    <MenuItem value={"Unitd States"}>Unitd States</MenuItem>
+                    <MenuItem value={"Canada"}>Canada</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -202,12 +225,24 @@ export default function TrackingPage() {
                   fullWidth
                   label="Destination Zip/Postal Zip"
                   variant="outlined"
-                  value={destinationZip} onChange={(e) => setDestinationZip(e.target.value)}
+                  value={destinationZip}
+                  onChange={(e) => setDestinationZip(e.target.value)}
                 />
               </Grid>
 
               <Grid item xs={12}>
-                <Button variant="outlined" color="secondary" onClick={handleClick}>
+                <Button
+                  variant="contained"
+                  sx={css`
+                    padding: 0.75rem 2.5rem;
+                    background: linear-gradient(
+                      45deg,
+                      #b51d50 0%,
+                      #ef7f1a 100%
+                    );
+                  `}
+                  onClick={handleClick}
+                >
                   Track
                 </Button>
               </Grid>

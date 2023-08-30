@@ -3,90 +3,42 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { Link as RLink } from "react-router-dom";
-
+import Stack from "@mui/material/Stack";
 import { css } from "@emotion/react";
-// images
-import Startimage from "../assets/quote-parallax.jpg";
 
-export default function Heading({ img, title, description, back }) {
-  const styles = {
-    heading: css`
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      // padding: 3rem 0;
-      padding-bottom: 3rem;
-      font-family: bebas neue;
-
-      @media (max-width: 768px) {
-        flex-direction: column;
-        padding-bottom: 2rem;
-      }
-    `,
-    imageStyle: css`
-      background-image: url(${img? img : Startimage});
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: rgba(71, 250, 0, 1);
-      font-family: "bebas neue";
-    `,
-
-    linkStyle: css`
-      font-size: 1.5rem;
-      color: #F07C00;
-      text-decoration: none;
-      padding: 2.5rem 0 1rem 0;
-
-      &:hover {
-        color: white;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 1rem;
-        padding: 1.5rem 0 0.4rem 0;
-      }
-    `,
-  };
-
+export default function Heading({ title, description, back, links }) {
   return (
-    <Box sx={styles.imageStyle}>
-      <Box
-        sx={{
-          height: "100%",
-          width: "100%",
-          background: "rgba(0,0,0,0.7)",
-        }}
-      >
-        <Container maxWidth="xl">
-        
-        <Box sx={styles.linkStyle}>
-        <Link to="/" sx={styles.linkStyle} component={RLink}>
-        {back}
-        </Link>
-        </Box>
-        <Box sx={styles.heading}>
-            <Typography
-              variant="h4"
-              sx={{ typography: { xs: "h5", md: "h4" }, fontFamily: "bebas neue", display:"flex", flexDirection:"column",}}
-            >
-            
-            {title}
-            
+    <Box
+      sx={css`
+        padding: 3rem 0;
+        background: linear-gradient(45deg, #b51d50 0%, #ef7f1a 100%);
+      `}
+    >
+      <Container maxWidth="lg">
+        <Stack direction="column" spacing={1}>
+          {back}
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            justifyContent={"space-between"}
+            sx={{
+              "& > *": {
+                color: "white",
+              },
+            }}
+          >
+            <Typography variant="h3" fontFamily={"bebas neue"}>
+              {title}
             </Typography>
             <Typography
-              variant="h5"
-              sx={{
-                typography: { xs: "body2", md: "body1" },
-                textAlign: { xs: "left", md: "right" },
-                fontFamily: "poppins",
-              }}
+              variant="subtitle2"
+              sx={{ "@media (min-width: 768px)": { alignSelf: "center" } }}
             >
-            {description}
+              {description}
             </Typography>
-            </Box>
-        </Container>
-      </Box>
+          </Stack>
+          {links}
+        </Stack>
+      </Container>
     </Box>
   );
 }

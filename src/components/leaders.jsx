@@ -1,7 +1,13 @@
 import React from "react";
-import { Container, Stack, Typography, Avatar } from "@mui/material";
+import { Container, Stack, Typography, Avatar, Grid, Box } from "@mui/material";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
+
+// leader's images
+import Kuldeep from "../assets/kuldeep_mathur.jpg";
+import Deepansh from "../assets/deepansh_mathur.jpg";
+import Rashmi from "../assets/rashmi_sahoo.jpg";
+import Srikanta from "../assets/srikanta_mohapatra.jpg"
 
 export default function Leaders() {
   const controls = useAnimation();
@@ -15,7 +21,7 @@ export default function Leaders() {
   }, [controls, isInView]);
 
   return (
-    <div style={{ padding: "5rem 0" }} ref={ref}>
+    <div style={{ padding: "5rem 0", overflow: "hidden", background: "linear-gradient(45deg, #B51D50 0%, #EF7F1A 100%)" }} ref={ref}>
       <Container>
         <motion.div
           animate={controls}
@@ -39,7 +45,7 @@ export default function Leaders() {
             sx={{
               textAlign: "center",
               fontFamily: "bebas neue",
-              color: "#F07C00",
+              color: "#fafafa",
             }}
           >
             The Leaders
@@ -53,83 +59,82 @@ export default function Leaders() {
           </Typography>
         </motion.div>
 
-        <Stack direction={"column"}>
+        {/* <Stack direction={"column"}> */}
+        <Grid container spacing={4}>
           {leadersData.map((data, index) => (
-            <motion.div 
-            key={index}
-            animate={controls}
-            initial="hidden"
-            variants={{
-              visible: {
-                opacity: 1,
-                scale: 1,
-                transition: { delay: 0.2 +  index * 0.4 },
-                x: 0,
-              },
-              hidden: { x: index%2 ? 500: -500, opacity: 0.1 },
-            }}
-            >
-              <div style={{ margin: "2.5rem 0" }}>
-                <Stack
-                  direction={
-                    index % 2
-                      ? { xs: "column-reverse", md: "row-reverse" }
-                      : { xs: "column-reverse", md: "row" }
-                  }
-                  spacing={1}
-                  sx={{
-                    background:
-                      index % 2
-                        ? { xs: "transparent", md: "#e74028" }
-                        : { xs: "transparent", md: "#ef7f1a" },
-                    borderRadius:
-                      index % 2
-                        ? { xs: ".25rem", md: "12% 0% 0% 12% / 50% 1% 1% 50%" }
-                        : { xs: ".25rem", md: "0% 15% 15% 0% / 0% 50% 50% 0%" },
-                    maxHeight: { xs: "auto", md: "220px" },
-                  }}
-                >
+            <Grid item xs={12} md={6} key={index}>
+              <motion.div
+                animate={controls}
+                initial="hidden"
+                variants={{
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { delay: 0.5 * index },
+                    x: 0,
+                  },
+                  hidden: { x: index % 2 ? 500 : -500, opacity: 0 },
+                }}
+              >
+                <Stack direction={"column-reverse"} spacing={1}>
                   <Typography
                     variant="body1"
-                    color={{ xs: "#000", md: "#f5f5f5" }}
+                    // color={{ xs: "#000", md: "#f5f5f5" }}
                     textAlign={"justify"}
                     sx={{ padding: ".5rem" }}
                   >
                     {data.desc}
                   </Typography>
-                  <Stack direction={"column"} spacing={2} alignItems={"center"}>
-                    <Avatar
+                  {/* image , name and designaiton */}
+                  <Stack
+                    direction={"column"}
+                    spacing={2}
+                    alignItems={"center"}
+                    sx={{ padding: ".5rem" }}
+                  >
+                    <Box
                       sx={{
-                        width: 220,
-                        height: 220,
-                        outline:
-                          index % 2
-                            ? ".5rem solid #ef7f1a"
-                            : ".5rem solid #b51d50",
+                        padding: ".5rem",
+                        aspectRatio: "1/1",
+                        borderRadius: "50%",
+                        background:
+                          "linear-gradient(45deg, #b51d50 0%, #ef7f1a 100%)",
                       }}
-                    />
+                    >
+                      <Avatar
+                        src={data.image}
+                        sx={{
+                          width: 220,
+                          height: 220,
+                        }}
+                      />
+                    </Box>
                     <Typography
                       variant="h5"
                       fontWeight="medium"
-                      color={"#000"}
+                      color={"#fafafa"}
                       fontFamily={"bebas neue"}
                     >
                       {data.name}
                       <Typography
                         variant="body1"
                         fontWeight="medium"
-                        color={"#ef7f1a"}
-                        sx={{ letterSpacing: "0.075rem" }}
+                        color={"rgb(186 187 189)"}
+                        sx={{
+                          letterSpacing: "0.075rem",
+                          textAlign: "center",
+                        }}
                       >
                         DIRECTOR
                       </Typography>
                     </Typography>
                   </Stack>
                 </Stack>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Grid>
           ))}
-        </Stack>
+        </Grid>
+        {/* </Stack> */}
       </Container>
     </div>
   );
@@ -139,8 +144,7 @@ const leadersData = [
   {
     name: "Rashmi Sahoo",
     designation: "Director",
-    image:
-      "https://res.cloudinary.com/dcoderdtu/image/upload/v1634178929/leaders/rashmi_sahoo.jpg",
+    image: Rashmi,
     desc: `Being groomed in a family of industrialists, Mrs Rashmi Sahoo is an expert in international
         and Indian cuisines. She has been using this talent of her's in enhancing and maintaining the
         tasty Ready-To-Eat products. She heads the technical & research wing which primarily
@@ -151,8 +155,7 @@ const leadersData = [
   {
     name: "Kuldeep Mathur",
     designation: "Director",
-    image:
-      "https://res.cloudinary.com/dcoderdtu/image/upload/v1634178929/leaders/rashmi_sahoo.jpg",
+    image: Kuldeep,
     desc: `Having vast experience in International Shipping and Finance. Mr. Mathur has worked over
         29yearsas CEO and Group CFO ofleadingshippingcompanies in Middle East.He hasalso
         contributed to marine industry from time to time as Secretary General of 'UAE Shipping
@@ -163,8 +166,7 @@ const leadersData = [
   {
     name: "Akshaya Kumar Parija",
     designation: "Director",
-    image:
-      "https://res.cloudinary.com/dcoderdtu/image/upload/v1634178929/leaders/rashmi_sahoo.jpg",
+    image: Srikanta,
     desc: `Experiencedseniorbanker with 27 years in Kuwaitand Oman. In 2010, he co-foundedashipping
     company, now a major energy career company. He owns the largest production Company in
     Odisha, India and second largest company in East India. He has produced 33 films in Odiya,
@@ -174,33 +176,9 @@ const leadersData = [
     Science, Public Administration and a nExecutive MBA from Harvard Business School,USA.`,
   },
   {
-    name: "Manish Jain",
-    designation: "Director",
-    image:
-      "https://res.cloudinary.com/dcoderdtu/image/upload/v1634178929/leaders/rashmi_sahoo.jpg",
-    desc: `An MBA from Bombay University, having vast experience in maritime industry as well as
-    various commodity trading for more than 20 years. He also has rich experience in Investment
-    and Consulting of Indian Stock Market. He was heading shipping and trading desks of Kandla
-    Export Corporation (KEC) for over 20 years. Previously, he worked with leading corporates in
-    Indialike Indian Rayons Limited, Reliance Industries Limitedand Modern Woolen Limited, where
-    he gained excellent experience in Marketing and General Management functions`,
-  },
-  {
-    name: "Srikanta Mohapatra",
-    designation: "Director",
-    image:
-      "https://res.cloudinary.com/dcoderdtu/image/upload/v1634178929/leaders/rashmi_sahoo.jpg",
-    desc: `Having expertise in finance, accounting, sales, stores, and logistics, Mr. Srikanta Mohapatra
-    has over 17 years of experience across varied industrial sectors. He has 10 years of
-    experience at a renowned manufacturing company in Odisha, India. He is a CMA graduate
-    from the Institute of Cost Accountants of India. He received his MBA from a reputable
-    Institution. He has completed his LLB degree from M.S law college, Odisha, India.`,
-  },
-  {
     name: "Deepansh Mathur",
     designation: "Director",
-    image:
-      "https://res.cloudinary.com/dcoderdtu/image/upload/v1634178929/leaders/rashmi_sahoo.jpg",
+    image: Deepansh,
     desc: `Mr. Deepansh Mathur has completed post graduation, Msc in International Business from
     Hult International Business School, Dubai. He has 3 years of experience in the Commercial
     Management and Post Fixture Activities in the Dry Bulk Sector of the international shipping

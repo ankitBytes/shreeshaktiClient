@@ -3,8 +3,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useEffect, useState } from "react";
 import { UserAuth } from "../../contexts/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,6 +12,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { css } from "@emotion/react";
 import Heading from "../../components/pageHeader";
+import { Alert } from "@mui/material";
+import { Link } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+
+
+
 
 export default function AdminLogin() {
   const { currentUser, logIn } = UserAuth();
@@ -21,7 +27,9 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formState, setFormState] = useState({ loading: false, error: null });
-  const [loginStatus, setLoginStatus] = useState(location?.state?.from==="/admin/dashboard"?true:false);
+  const [loginStatus, setLoginStatus] = useState(
+    location?.state?.from === "/admin/dashboard" ? false : true
+  );
 
   useEffect(() => {
     setLoginStatus(location?.state?.isAdmin);
@@ -65,14 +73,63 @@ export default function AdminLogin() {
 
   return (
     <>
-    <Box>
-      <Heading title="ADMIN LOGIN" back="<< BACK TO HOMEPAGE"/>
-      <Container maxWidth="xl" sx={styles.container}>
-        <Typography variant="h5" component="h1" align="center" sx={{fontFamily:"bebas neue", fontSize:"2rem", color:"#094559"}}>
-          Login as Admin
-        </Typography>
+      <Box>
+        <Heading
+          title="ADMIN LOGIN"
+          back={
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Stack direction="row" spacing={1} sx={{ maxWidth: "300px" }}>
+                <ChevronLeftIcon
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    color: "#ef7f1a",
+                  }}
+                />
+                <Typography
+                  variant="body1"
+                  fontWeight={"bold"}
+                  sx={{ color: "#ef7f1a" }}
+                >
+                  Back to Home
+                </Typography>
+              </Stack>
+            </Link>
+          }
+          links={
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link to="/">Home</Link>
+              <Link to="/admin/login">Admin Login</Link>
+            </Breadcrumbs>
+          }
+        />
+
+
+        <Container maxWidth="xl" sx={styles.container}>
+          <Typography
+            variant="h4"
+            component="h1"
+            align="center"
+            sx={{
+              fontFamily: "bebas neue",
+              fontSize: "2rem", 
+              color: "#ef7f1a",
+            }}
+          >
+            Login as Admin
+          </Typography>
 
           <Box sx={styles.formBox}>
+            {/* error message for login */}
+            {formState.error !== null && (
+              <Alert
+                variant="outlined"
+                severity="error"
+                onClose={() => setFormState({ error: null })}
+              >
+                {formState.error}
+              </Alert>
+            )}
             <form onSubmit={handleSubmit}>
               <TextField
                 type="email"
@@ -97,7 +154,9 @@ export default function AdminLogin() {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                sx={{
+                  background: "linear-gradient(45deg,#b51d50 0%,#ef7f1a 100%);",
+                }}
                 disabled={formState.loading}
               >
                 {formState.loading ? "logging you in" : "Login"}
@@ -115,19 +174,9 @@ export default function AdminLogin() {
           >
             <Snackbar
               open={!loginStatus}
-              autoHideDuration={3000}
-              onClose={() => setLoginStatus(false)}
+              autoHideDuration={1500}
+              // onClose={() => setLoginStatus(false)}
               message={"You were logged out!"}
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => setLoginStatus(false)}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
             />
           </Box>
         </Container>

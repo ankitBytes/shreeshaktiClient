@@ -31,11 +31,10 @@ body {
 
 /* header carousel next and prev styles */
 .swiper-button-next,
-  .swiper-button-prev{
-    /* background: #B51D50; */
-    color: #EF7F1A;
-    margin: 0 .5rem;
-  }
+.swiper-button-prev {
+  color: #ef7f1a !important;
+  margin: 0 0.5rem;
+}
 
 @media screen and (max-width: 576px) {
   ._1yCVn {
@@ -46,11 +45,11 @@ body {
 @media screen and (max-width: 768px) {
   .swiper-button-next,
   .swiper-button-prev {
-    display: none;
+    display: none !important;
   }
 }
 /* page loaders css */
-#loader-wrapper{
+#loader-wrapper {
   position: absolute;
   top: 0;
   background: #fff;
@@ -61,7 +60,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-#loader-wrapper img{
+#loader-wrapper img {
   max-width: 150px;
 }
-

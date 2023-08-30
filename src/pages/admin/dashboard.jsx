@@ -8,12 +8,13 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Heading from "../../components/pageHeader";
-
+import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Snackbar from "@mui/material/Snackbar";
-
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { css } from "@emotion/react";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -60,11 +61,7 @@ export default function AdminDashboard() {
       width: 100%;
       max-width: 300px;
       padding: 1rem;
-      border: 0.12rem solid;
-
-      &:hover{
-        background-color: rgba(233, 230, 231, 0.8);
-      }
+      background: linear-gradient(45deg, #b51d50 0%, #ef7f1a 100%);
     `,
     OperationBox: css`
       justify-content: center;
@@ -81,43 +78,57 @@ export default function AdminDashboard() {
             variant="outlined"
             onClick={() => {
               logOut();
-              navigate("/admin/login", { state: { isAdmin: false, from:location.pathname } });
+              navigate("/admin/login", {
+                state: { isAdmin: false, from: location.pathname },
+              });
             }}
             sx={css`
-            color:#EAEAEA;
-            font-size: 1rem;
-            border-color: #EAEAEA;
-
-            &:hover {
-              color: #a43d2b;
-              background-color: #EAEAEA;  
-            }
-
-            @media (max-width: 768px) {
-              border: none;
-              font-size: 0.8rem;
-              padding: 0;
-              color: #ad72f9;
+              color: #eaeaea;
+              border-color: #eaeaea;
 
               &:hover {
-                background: none;
+                color: #a43d2b;
+                background-color: #eaeaea;
               }
-            }
-          `
-        }
-            size="small"
+            `}
+            size={"large"}
           >
-            LOGOUT
+            logout
           </Button>
         }
-        back="<< BACK TO HOMEPAGE"
+        back={
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Stack direction="row" spacing={1} sx={{ maxWidth: "300px" }}>
+              <ChevronLeftIcon
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                  color: "#ef7f1a",
+                }}
+              />
+              <Typography
+                variant="body1"
+                fontWeight={"bold"}
+                sx={{ color: "#ef7f1a" }}
+              >
+                Back to Home
+              </Typography>
+            </Stack>
+          </Link>
+        }
+        links={
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link to="/">Home</Link>
+            <Link to="/admin/dashboard">Admin Dashboard</Link>
+          </Breadcrumbs>
+        }
       />
       <Container maxWidth="xl">
-        <Box sx={{ padding: "2rem 0"}}>
+        <Box sx={{ padding: "2rem 0" }}>
           <Stack spacing={2} direction="row" sx={styles.OperationBox}>
             <Button
               sx={styles.OperationBtn}
-              variant="outlined"
+              variant="contained"
               onClick={() => {
                 setAddclient(!addclient);
                 setViewclients(false);
@@ -127,7 +138,7 @@ export default function AdminDashboard() {
             </Button>
             <Button
               sx={styles.OperationBtn}
-              variant="outlined"
+              variant="contained"
               onClick={() => {
                 setViewclients(!viewclients);
                 setAddclient(false);
@@ -204,7 +215,7 @@ function ClientsView({ setFeedback }) {
       (snapshot) => {
         const updatedList = snapshot.docs.map((doc) => doc.data());
         setClients(updatedList);
-        console.log(updatedList);
+        // console.log(updatedList);
       }
     );
     return () => unsubscribe(); // Unsubscribe from the snapshot listener when the component unmounts

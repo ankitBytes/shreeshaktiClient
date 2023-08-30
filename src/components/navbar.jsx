@@ -13,7 +13,11 @@ import Collapse from "@mui/material/Collapse";
 import { useEffect, useState } from "react";
 import ShreeShaktiLogo from "../assets/shreeshakti-logo.png";
 import { Typography } from "@mui/material";
-import Avatar from "@mui/material/Avatar"
+import Avatar from "@mui/material/Avatar";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -133,7 +137,7 @@ export default function Navbar() {
                 Shipment
               </Link>
               <Link sx={styles.link} component={RLink} to="/admin/login">
-                Admin
+                <AdminPanelSettingsIcon fontSize="large"/>
               </Link>
             </Stack>
           </Stack>

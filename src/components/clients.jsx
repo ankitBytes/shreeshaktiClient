@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -27,23 +28,25 @@ export default function Clients() {
 
   const ClientStyles = {
     logoImgContainer: {
-      aspectRatio: "1/1",
+      // aspectRatio: "1/1",
       padding: "1rem",
-      maxHeight: "10rem",
+      maxHeight: "8rem",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      background: "transparent",
     },
     logoImg: {
       width: "100%",
       objectFit: "contain",
       objectPosition: "center",
+      aspectRatio: "1/1",
     },
     clientCarouselContainer: {
       padding: "2rem 0",
       width: "100%",
       height: "100%",
-      background: "white",
+      // background: "linear-gradient(45deg, #B51D50 0%, #EF7F1A 100%)",
     },
   };
 
@@ -61,25 +64,28 @@ export default function Clients() {
             }}
           >
             Associate Brands
-            <Typography variant="body2" fontWeight="bold" sx={{ color: "#094559" ,textTransform:'uppercase'}}>India's most reputed brands</Typography>
+            <Typography
+              variant="body2"
+              fontWeight="bold"
+              sx={{ color: "#094559", textTransform: "uppercase" }}
+            >
+              India's most reputed brands
+            </Typography>
           </Typography>
 
           <Box>
             <Swiper
-              slidesPerGroup={1}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-              centeredSlides={true}
               loop={true}
-              rewind={true}
               breakpoints={{
                 0: {
                   slidesPerView: 2,
                   spaceBetween: 10,
                 },
-                400: {
+                420: {
                   slidesPerView: 3,
                   spaceBetween: 10,
                 },

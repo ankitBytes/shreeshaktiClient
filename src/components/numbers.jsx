@@ -42,7 +42,7 @@ export default function NumbersSection() {
         >
           <Grid container spacing={{ xs: 5, sm: 6, md: 2 }}>
             {numbersData.map((item, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
+              <Grid item xs={12} sm={4} md={4} key={index}>
                 <motion.div
                   whileHover={{ scale: 1.025 }}
                   animate={controls}
@@ -87,11 +87,6 @@ const numbersData = [
     icon: <PersonIcon />,
     number: 270,
     title: "Employees",
-  },
-  {
-    icon: <LocalShippingIcon />,
-    number: 128,
-    title: "Owned Vehicles",
   },
 ];
 

@@ -1,4 +1,4 @@
-// import Paper from '@mui/material/Paper';
+import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -10,9 +10,18 @@ import Link from "@mui/material/Link";
 import { Facebook, Twitter, LinkedIn, Instagram } from "@mui/icons-material";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
-import { useState } from 'react';
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import { useState } from "react";
+import MuiAlert from "@mui/material/Alert";
 
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Snackbar from "@mui/material/Snackbar";
+import dayjs from "dayjs";
 import { css } from "@emotion/react";
+
+// animation
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
 
 import ShreeShaktiLogo from "../assets/shreeshakti-logo.png";
 
@@ -33,11 +42,69 @@ function Copyright() {
   );
 }
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function PageFooter() {
+  // animation
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "0px 0px -300px 0px" });
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [controls, isInView]);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [destinationTo, setDestinationTo] = useState("");
+  const [destinationFrom, setDestinationFrom] = useState("");
+  const [date, setDate] = useState(null);
+  const [type, setType] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleQuoteForm = async (e) => {
+    e.preventDefault();
+    const recipient = 'info@shree-shakti.com';
+    const subject = `Request for the tracing details of my shipment`;
+    const htmlContent = `
+    ${name} have requested a quote below are the details of the shipment
+
+    Name: ${name}
+    Email: ${email}
+    Mobile: ${mobile}
+    Source: ${destinationFrom}
+    Destination: ${destinationTo}
+    Start date: ${date}
+    Goods type: ${type}
+    Message: ${message}`;
+
+    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(htmlContent)}`;
+    
+    window.location.href = mailtoLink;
+  };
+
   const footerStyles = {
     root: css`
-      padding: 2rem 0 0 0;
-      background: #EAEAEA;
+      padding: 2rem 0;
+      background: #eaeaea;
+      overflow: hidden;
     `,
     section: {
       marginBottom: "20px",
@@ -64,40 +131,138 @@ export default function PageFooter() {
       textAlign: "center",
       backgroundColor: "#F5F5F5",
     },
-    info : css `
-      font-family:'poppins';
+    info: css`
+      font-family: "poppins";
     `,
   };
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const styles = {
+    heading: css`
+      color: white;
+      margin-bottom: 1rem;
+      @media (max-width: 768px) {
+        text-align: center;
+      }
+    `,
+    quoteContainer: css`
+      position: absolute;
+      isolation: isolate;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      @media (max-width: 768px) {
+        position: relative;
+      }
+    `,
+    formContainer: css`
+      padding: 2rem 0.5rem;
+      @media (min-width: 768px) {
+        max-width: 50%;
+      }
+    `,
+    quoteBack: css`
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: 55%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.9;
+      background: linear-gradient(45deg, #b51d50 0%, #ef7f1a 100%);
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+    `,
+    // formInputField: css`
+    //   input[type="number"]::-webkit-inner-spin-button,
+    //   input[type="number"]::-webkit-outer-spin-button {
+    //     -webkit-appearance: none;
+    //     margin: 0;
+    //   }
 
-  const submitForm = async (e) => {
-    e.preventDefault();
-    // console.log({name}, {email}, {message});
-    const response = await fetch (`https://shreeshaktiserver.onrender.com/contactUs`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({name, email, message}),
-    }).then((res) => res.json())
-    .then(async (res) => {
-      const resData = await res;
-      //  console.log(resData);
-       if (resData.status === "success") {
-        console.log("Message Sent");
-       } else if (resData.status === "fail") {
-        console.log("Message failed to send");
-       }
-    })
-    .then(() => {{name , email, message}});
+    //   & label {
+    //     color: #aaa;
+    //   }
+    //   & label.Mui-focused {
+    //     color: white;
+    //   }
+    //   & input {
+    //     color: white;
+    //   }
+
+    //   & textarea {
+    //     color: white;
+    //   }
+
+    //   & label.Mui-focused {
+    //     color: white;
+    //   }
+    //   & .MuiInput-underline:after {
+    //     border-bottom-color: white;
+    //   }
+    //   & .MuiOutlinedInput-root {
+    //     & fieldset {
+    //       border-color: #aaa;
+    //     }
+    //     &:hover fieldset {
+    //       border-color: white;
+    //     }
+    //     &.Mui-focused fieldset {
+    //       border-color: #ddd;
+    //     }
+    //   }
+    // `,
+    // datePickerField: css`
+    //   width: 100%;
+    //   svg {
+    //     color: #aaa;
+    //   }
+    //   svg: hover {
+    //     color: white;
+    //   }
+    //   & label {
+    //     color: #aaa;
+    //   }
+    //   & label.Mui-focused {
+    //     color: #aaa;
+    //   }
+    //   & input {
+    //     color: white;
+    //   }
+    //   & .MuiOutlinedInput-root {
+    //     & fieldset {
+    //       border-color: #aaa;
+    //     }
+    //     &:hover fieldset {
+    //       border-color: white;
+    //     }
+    //     &.Mui-focused fieldset {
+    //       border-color: #aaa;
+    //     }
+    //   }
+    // `,
+
+    inputElement: css`
+      font-family: "poppins";
+    `,
+
+    submitButton: css`
+      background-color: #e74028;
+      color: #fff;
+      font-family: poppins;
+      padding: 0.5rem 2rem;
+
+      &:hover {
+        background-color: #ef7f1a;
+      }
+    `,
   };
 
   return (
     <Box>
-      <Box sx={footerStyles.root}>
+      <Box sx={footerStyles.root} ref={ref}>
         <Container maxWidth="xl">
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
@@ -112,7 +277,11 @@ export default function PageFooter() {
                 <Grid item xs={12}>
                   <Typography
                     variant="body1"
-                    sx={{ textTransform: "uppercase", fontFamily:'bebas neue',fontSize:"1.25rem"}}
+                    sx={{
+                      textTransform: "uppercase",
+                      fontFamily: "bebas neue",
+                      fontSize: "1.25rem",
+                    }}
                   >
                     ShreeShakti food and beverages trading l.l.c
                   </Typography>
@@ -125,13 +294,26 @@ export default function PageFooter() {
                     <strong>
                       <AlternateEmailOutlinedIcon />
                     </strong>{" "}
-                    info@shreeshakti.com
+                    info@shree-shakti.com
                   </Typography>
                   <Typography variant="body1">
                     <strong>
                       <PhoneOutlinedIcon />
                     </strong>{" "}
-                    +971 123456789
+                    +971 424 086 55
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>
+                      <PhoneOutlinedIcon />
+                    </strong>{" "}
+                    +971 523 700 294
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>
+                      <LocationOnOutlinedIcon />
+                    </strong>{" "}
+                    Office MZ 02 Belshalat Building Commercial,<br/>Al Baraha,
+                    Dubai, UAE
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -151,54 +333,190 @@ export default function PageFooter() {
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Grid container spacing={1} style={footerStyles.section}>
-                <Grid item xs={12}>
-                  <Typography variant="h4" sx={{fontFamily:"bebas neue"}}>Contact Us</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <form onSubmit={submitForm}>
-                    <TextField
-                      fullWidth
-                      hiddenLabel
-                      placeholder="Name"
-                      variant="filled"
-                      size="small"
-                      margin="dense"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                    <TextField
-                      fullWidth
-                      hiddenLabel
-                      placeholder="Email Address"
-                      variant="filled"
-                      size="small"
-                      margin="dense"
-                      value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <TextField
-                      hiddenLabel
-                      fullWidth
-                      multiline
-                      minRows={4}
-                      placeholder="Message"
-                      variant="filled"
-                      size="small"
-                      margin="dense"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                    />
-                    <Button
-                      variant="outlined"
-                      sx={footerStyles.formButton}
-                      type="submit"
-                    >
-                      Send
-                    </Button>
+              <motion.div
+                initial={"hidden"}
+                animate={controls}
+                variants={{
+                  hidden: { opacity: 0, x: 200 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+                }}
+              >
+                <Box sx={styles.heading}>
+                  <Typography
+                    variant="h3"
+                    sx={{ fontFamily: "bebas neue", color: "#f07c00" }}
+                  >
+                    Reach out to Us
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ fontFamily: "poppins", color: "#757575" }}
+                  >
+                    We always use best and fastest fleets
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontFamily: "poppins",
+                      color: "red",
+                      fontSize: "0.7rem",
+                    }}
+                  >
+                    * mark indicates required fields
+                  </Typography>
+                </Box>
+                <Box>
+                  <form onSubmit={(e) => handleQuoteForm(e)}>
+                    <Grid container spacing={1} sx={styles.inputElement}>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          color="warning"
+                          size="small"
+                          id="name"
+                          label="Full Name"
+                          sx={styles.formInputField}
+                          required
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          color="warning"
+                          size="small"
+                          id="email"
+                          label="Email"
+                          type="email"
+                          sx={styles.formInputField}
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          color="warning"
+                          size="small"
+                          id="mobile"
+                          label="Mobile"
+                          sx={styles.formInputField}
+                          required
+                          value={mobile}
+                          onChange={(e) => setMobile(e.target.value)}
+                          type="number"
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          size="small"
+                          color="warning"
+                          fullWidth
+                          id="destinationTo"
+                          label="Destination To"
+                          sx={styles.formInputField}
+                          required
+                          value={destinationTo}
+                          onChange={(e) => setDestinationTo(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          color="warning"
+                          size="small"
+                          id="destinationFrom"
+                          label="Destination From"
+                          sx={styles.formInputField}
+                          required
+                          value={destinationFrom}
+                          onChange={(e) => setDestinationFrom(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          color="warning"
+                          size="small"
+                          id="shipmentType"
+                          label="Shipping Type"
+                          sx={styles.formInputField}
+                          required
+                          value={type}
+                          onChange={(e) => setType(e.target.value)}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={6}>
+                        <DatePicker
+                          label="Date"
+                          sx={styles.datePickerField}
+                          value={date}
+                          onChange={(value) => setDate(value)}
+                          slotProps={{
+                            textField: {
+                              size: "small",
+                              color: "warning",
+                              fullWidth: "true",
+                              required: "true",
+                            },
+                          }}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <TextField
+                          size="small"
+                          color="warning"
+                          id="Messege"
+                          multiline
+                          rows={4}
+                          fullWidth
+                          label="Messege"
+                          sx={styles.formInputField}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          variant="contained"
+                          size="large"
+                          type="submit"
+                          sx={styles.submitButton}
+                        >
+                          Submit
+                        </Button>
+                        <Snackbar
+                          open={open}
+                          autoHideDuration={5000}
+                          onClose={handleClose}
+                        >
+                          <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            sx={css`
+                              width: 100%;
+                              @media (max-width: 768px) {
+                                width: 70%;
+                              }
+                            `}
+                          >
+                            Sent!
+                          </Alert>
+                        </Snackbar>
+                      </Grid>
+                    </Grid>
                   </form>
-                </Grid>
-              </Grid>
+                </Box>
+              </motion.div>
             </Grid>
           </Grid>
         </Container>

@@ -48,6 +48,7 @@ export default function WhySection() {
   const styles = {
     whySection: css`
       min-height: 30vh;
+      background: linear-gradient(45deg, #B51D50 0%, #EF7F1A 100%);
     `,
     card: css`
       padding: 1rem;
@@ -59,7 +60,7 @@ export default function WhySection() {
       font-family: "poppins";
 
       & h5 {
-        color: rgb(231, 64, 40);
+        color: #fafafa;
       }
 
       & p {
@@ -93,7 +94,7 @@ export default function WhySection() {
             sx={{
               textAlign: "center",
               fontFamily: "bebas neue",
-              color: "#F07C00",
+              color: "#fafafa",
             }}
           >
             Why Choose Us?
@@ -132,6 +133,7 @@ export default function WhySection() {
                       width: 120px;
                       height: 120px;
                       margin: 1rem;
+                      background: white;
                     `}
                   />
                   <Typography

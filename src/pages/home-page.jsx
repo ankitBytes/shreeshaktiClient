@@ -10,19 +10,19 @@ import Leaders from "../components/leaders";
 import { useEffect } from "react";
 
 export default function HomePage() {
-  useEffect( ()=>{
+  useEffect(() => {
     document.title = "Home | Shree Shakti Trading";
-  },[])
+  }, []);
   return (
-    <>
+    <div style={{position:"relative"}}>
       <PageHeader />
       <NumbersSection />
       <ServiceSection />
       <AboutSection />
       <WhySection />
-      <Quote />
-      <Leaders />
       <Clients />
-    </>
+      <Leaders />
+      {/* <Quote /> */}
+    </div>
   );
 }
