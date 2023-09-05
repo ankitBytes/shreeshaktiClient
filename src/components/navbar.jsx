@@ -130,9 +130,9 @@ export default function Navbar() {
               <Link sx={styles.link} component={RLink} to="/services">
                 Services
               </Link>
-              <Link sx={styles.link} component={RLink} to="/admin/login">
+              {/*<Link sx={styles.link} component={RLink} to="/admin/login">
                 <AdminPanelSettingsIcon fontSize="large"/>
-              </Link>
+                </Link>*/}
             </Stack>
           </Stack>
 
@@ -163,14 +163,14 @@ export default function Navbar() {
                 >
                   Services
                 </Link>
-                <Link
+                {/*<Link
                   sx={styles.link}
                   component={RLink}
                   to="/admin/login"
                   onClick={() => setOpen(!open)}
                 >
                   Admin
-                </Link>
+              </Link>*/}
                 
               </Stack>
             </Container>
