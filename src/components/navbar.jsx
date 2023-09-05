@@ -130,12 +130,6 @@ export default function Navbar() {
               <Link sx={styles.link} component={RLink} to="/services">
                 Services
               </Link>
-              <Link sx={styles.link} component={RLink} to="/tracking">
-                Tracking
-              </Link>
-              <Link sx={styles.link} component={RLink} to="/shipment">
-                Shipment
-              </Link>
               <Link sx={styles.link} component={RLink} to="/admin/login">
                 <AdminPanelSettingsIcon fontSize="large"/>
               </Link>
@@ -168,22 +162,6 @@ export default function Navbar() {
                   onClick={() => setOpen(!open)}
                 >
                   Services
-                </Link>
-                <Link
-                  sx={styles.link}
-                  component={RLink}
-                  to="/tracking"
-                  onClick={() => setOpen(!open)}
-                >
-                  Tracking
-                </Link>
-                <Link
-                  sx={styles.link}
-                  component={RLink}
-                  to="/shipment"
-                  onClick={() => setOpen(!open)}
-                >
-                  Shipment
                 </Link>
                 <Link
                   sx={styles.link}
